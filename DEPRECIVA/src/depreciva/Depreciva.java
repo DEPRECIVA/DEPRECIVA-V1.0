@@ -1,7 +1,9 @@
 //DEPRECIVA : De precision variable es una calculadora con tal caracteristica  y  defectos , en busca de sentido.
 //Autor: Vargas Juan José
+//       Ramiro Murua
 package depreciva;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Depreciva {
@@ -13,10 +15,13 @@ public class Depreciva {
     static String cifrasDecimales; //usada para la división 
     static int cont = 0;
 
-    public static void main(String[] args) throws StringIndexOutOfBoundsException, InterruptedException {
+    /*public static void main(String[] args) throws StringIndexOutOfBoundsException, InterruptedException {
 
         Depreciva n1 = new Depreciva();
         Depreciva n2 = new Depreciva();
+        
+      
+        
         System.out.println("Ingrese el primer número (punto-> decimal '-+' signo) :");
         n1.ingresarNúmero();
         decorador("Filtrando", 800);
@@ -41,11 +46,29 @@ public class Depreciva {
         System.out.println(n2.n);
         System.out.println("");
 
+        
         System.out.println("Resultado:");
         System.out.println("");
         if (operador=='/')System.out.println("En algunas ocasiones la cantidad de decimales elegidos no es correcta");
         System.out.println(n1.operacionRelativa(n2));
 
+    }*/
+    
+    public static void calcularTodo(Vista vistaprincipal) throws StringIndexOutOfBoundsException, InterruptedException {
+        Depreciva n1 = new Depreciva();
+        Depreciva n2 = new Depreciva();
+        
+        n1.ingresarNúmero(vistaprincipal.getValor1().getText());
+        n2.ingresarNúmero(vistaprincipal.getValor2().getText());
+        
+        operador = vistaprincipal.getjComboBox1().getSelectedItem().toString().charAt(0);
+        cifrasDecimales = vistaprincipal.getjComboBox2().getSelectedItem().toString();
+
+        equilibrarPuntos(n1, n2);
+        emparejarDecimales(n1, n2);
+        
+        String resul = "Resultado: " + n1.operacionRelativa(n2);
+        vistaprincipal.getLabelResultado().setText(resul);
     }
 
     public void ingresarNúmero() {
@@ -54,6 +77,46 @@ public class Depreciva {
         String aux = "";
 
         n = sc.nextLine().trim();
+
+        for (int i = 0; i < n.length(); i++) {
+            try {
+                if (i == 0 && n.charAt(0) == '-') {  //Se respeta el signo en la primera posición
+                    aux += "-";
+                    continue;
+                } else if (i == 0) {
+                    aux += "+";
+                }
+                if (n.charAt(i) == '.' && !aux.contains(".")) { //Si pongo un punto después del decimal se acepta
+                    aux += ".";
+                    pocisiónPunto = aux.length() - 1;   //se descuenta la posición del signo
+                    continue;
+                }
+                num = Integer.parseInt(String.valueOf(n.charAt(i)));
+                aux += num;
+
+            } catch (NumberFormatException e) {
+                cont++;
+            }
+        }
+        if (!n.contains(".")) {
+            if (n.contains("-") && n.length() == 1) {
+                n = "-0.";
+                this.pocisiónPunto = 2;
+            } else {
+                n = aux + ".";
+                this.pocisiónPunto = n.length() - 1;
+            }
+        } else {
+            n = aux;
+        }
+        numOrigin = n;
+    }
+    
+    public void ingresarNúmero(String numero) {
+        int num = 0;
+        String aux = "";
+
+        n = numero;
 
         for (int i = 0; i < n.length(); i++) {
             try {
