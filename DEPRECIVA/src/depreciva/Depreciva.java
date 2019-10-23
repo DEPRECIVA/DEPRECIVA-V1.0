@@ -15,44 +15,7 @@ public class Depreciva {
     static String cifrasDecimales; //usada para la división 
     static int cont = 0;
 
-    /*public static void main(String[] args) throws StringIndexOutOfBoundsException, InterruptedException {
-
-        Depreciva n1 = new Depreciva();
-        Depreciva n2 = new Depreciva();
-        
-      
-        
-        System.out.println("Ingrese el primer número (punto-> decimal '-+' signo) :");
-        n1.ingresarNúmero();
-        decorador("Filtrando", 800);
-        System.out.println("n: " + n1.n);
-        ingresarOperacion();
-
-        System.out.println("Ingrese el segundo (punto-> decimal '-+' signo) :");
-        n2.ingresarNúmero();
-        decorador("Filtrando", 800);
-        System.out.println("n: " + n2.n);
-        if (operador == '/') {
-            opcionesDivision(n1.n, n2.n);
-        }
-
-        System.out.println("");
-
-        equilibrarPuntos(n1, n2);
-        emparejarDecimales(n1, n2);
-
-        System.out.println(n1.n);
-        System.out.println(operador);
-        System.out.println(n2.n);
-        System.out.println("");
-
-        
-        System.out.println("Resultado:");
-        System.out.println("");
-        if (operador=='/')System.out.println("En algunas ocasiones la cantidad de decimales elegidos no es correcta");
-        System.out.println(n1.operacionRelativa(n2));
-
-    }*/
+   
     
     public static void calcularTodo(Vista vistaprincipal) throws StringIndexOutOfBoundsException, InterruptedException {
         Depreciva n1 = new Depreciva();
